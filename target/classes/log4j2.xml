@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <!-- Propiedades globales -->
+    <Properties>
+        <!-- Carpeta donde se trabajarán los archivos de depuración -->
+        <Property name="ruta">/org.mlb-logs/JSoup</Property>
+
+        <!-- Patrón del mensaje -->
+        <Property name="patron">[%highlight{%-5level}] %d{DEFAULT} %c{1}.%M() - %msg%n%throwable{short.lineNumber}</Property>
+    </Properties>
+
+    <!-- Appenders -->
+    <Appenders>
+        <!-- Consola -->
+        <Console name="consola" target="SYSTEM_OUT">
+            <!-- Patrón del mensaje, definido en Properties > pattern -->
+            <PatternLayout pattern="${patron}" />
+        </Console>
+
+        <!-- Archivo: Aplicación -->
+        <RollingFile name="logAplicacion" fileName="${ruta}/aplicacion.log"
+            filePattern="${ruta}/aplicacion_%d{yyyy-MM-dd}.log">
+
+            <!-- Patrón del mensaje, definido en Properties > pattern -->
+            <PatternLayout pattern="${patron}" />
+
+            <!-- Políticas de generación de archivos -->
+            <Policies>
+                <!-- Causes a rollover if the log file is older than the current JVM's start time -->
+                <OnStartupTriggeringPolicy />
+
+                <!-- Causes a rollover once the date/time pattern no longer applies to the active file -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <!-- Archivo: Spring Framework -->
+        <RollingFile name="logFramework" fileName="${ruta}/spring-framework.log"
+            filePattern="${ruta}/spring-framework_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${patron}" />
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <!-- Archivo: Errores -->
+        <RollingFile name="logError" fileName="${ruta}/error.log"
+            filePattern="${ruta}/error_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${patron}" />
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <!-- Loggers -->
+    <Loggers>
+        <!-- Aplicación -->
+        <!-- additivity="false" permite deshacerse de los logs duplicados -->
+        <Logger name="org.mlb.JSoup" level="debug" additivity="false">
+            <AppenderRef ref="consola" />
+            <AppenderRef ref="logAplicacion" />
+        </Logger>
+
+        <!-- Spring Framework -->
+        <Logger name="org.springframework" level="error" additivity="false">
+            <AppenderRef ref="consola" />
+            <AppenderRef ref="logFramework" />
+        </Logger>
+
+        <!-- Raíz -->
+        <Root level="error" additivity="false">
+            <AppenderRef ref="consola" />
+            <AppenderRef ref="logError" />
+        </Root>
+    </Loggers>
+
+</Configuration>
