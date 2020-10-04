@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- Configuración de la Base de Datos -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!-- Driver -->
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+
+        <!-- URL de conexión -->
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+
+        <!-- Nombre de Usuario -->
+        <property name="username" value="system" />
+
+        <!-- Contraseña de Acceso -->
+        <property name="password" value="root" />
+    </bean>
+
+    <!-- Configuración de JPA -->
+    <bean id="entityManagerFactory"
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <!-- Referencia la datasource previamente configurado -->
+        <property name="dataSource" ref="dataSource" />
+
+        <!-- Especificar qué paquete contiene los modelos -->
+        <property name="packagesToScan" value="org.mlb.JSoup.modelos" />
+
+        <!-- Vendor Adapter -->
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+
+        <!-- Propiedades JPA -->
+        <property name="jpaProperties">
+            <props>
+                <!-- Dialecto > https://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/session-configuration.html -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+
+                <!-- Mostrar consultas SQL (depuración) -->
+                <prop key="hibernate.show_sql">true</prop>
+
+                <!-- Usar comentarios SQL. Permite ver los valores utilizados en las consultas -->
+                <prop key="use_sql_comments">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Administrador de transacciones -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <!-- Habilitar la búsqueda de componentes en el proyecto -->
+    <context:component-scan base-package="org.mlb.JSoup" />
+
+    <!-- Configuración del Administrador de Transacciones -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!-- Configuración de los Repositorios -->
+    <jpa:repositories base-package="org.mlb.JSoup.repositorios" />
+
+</beans>
