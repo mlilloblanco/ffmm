@@ -1,10 +1,10 @@
-package org.mlb.JSoup.modelos;
+package org.mlb.ffmm.modelos;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.mlb.ffmm.modelos.RespuestaAPI;
 import org.springframework.http.HttpStatus;
 
 class RespuestaAPITest {

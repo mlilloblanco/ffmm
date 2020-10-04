@@ -1,4 +1,4 @@
-package org.mlb.JSoup.controladores;
+package org.mlb.ffmm.controladores;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mlb.JSoup.modelos.Apuesta;
-import org.mlb.JSoup.modelos.Ffmm;
-import org.mlb.JSoup.servicios.JSoupService;
+import org.mlb.ffmm.modelos.Apuesta;
+import org.mlb.ffmm.modelos.Ffmm;
+import org.mlb.ffmm.servicios.JSoupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

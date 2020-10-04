@@ -3,7 +3,7 @@
     <!-- Propiedades globales -->
     <Properties>
         <!-- Carpeta donde se trabajarán los archivos de depuración -->
-        <Property name="ruta">/org.mlb-logs/JSoup</Property>
+        <Property name="ruta">/org.mlb-logs/ffmm</Property>
 
         <!-- Patrón del mensaje -->
         <Property name="patron">[%highlight{%-5level}] %d{DEFAULT} %c{1}.%M() - %msg%n%throwable{short.lineNumber}</Property>

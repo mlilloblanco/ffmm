@@ -1,4 +1,4 @@
-package org.mlb.JSoup.modelos;
+package org.mlb.ffmm.modelos;
 
 import java.time.LocalDateTime;
 

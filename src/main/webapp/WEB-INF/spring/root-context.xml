@@ -31,7 +31,7 @@
         <property name="dataSource" ref="dataSource" />
 
         <!-- Especificar qué paquete contiene los modelos -->
-        <property name="packagesToScan" value="org.mlb.JSoup.modelos" />
+        <property name="packagesToScan" value="org.mlb.ffmm.modelos" />
 
         <!-- Vendor Adapter -->
         <property name="jpaVendorAdapter">
@@ -59,12 +59,12 @@
     </bean>
 
     <!-- Habilitar la búsqueda de componentes en el proyecto -->
-    <context:component-scan base-package="org.mlb.JSoup" />
+    <context:component-scan base-package="org.mlb.ffmm" />
 
     <!-- Configuración del Administrador de Transacciones -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- Configuración de los Repositorios -->
-    <jpa:repositories base-package="org.mlb.JSoup.repositorios" />
+    <jpa:repositories base-package="org.mlb.ffmm.repositorios" />
 
 </beans>

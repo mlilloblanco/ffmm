@@ -32,6 +32,6 @@
         Escanéa el Classpath en búsqueda de anotaciones como @Component, @Repository, @Service,
         @Controller, etc.
     -->
-    <context:component-scan base-package="org.mlb.JSoup" />
+    <context:component-scan base-package="org.mlb.ffmm" />
 
 </beans:beans>

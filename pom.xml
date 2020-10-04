@@ -6,7 +6,7 @@
 
 	<!-- Información del Proyecto -->
 	<groupId>org.mlb</groupId>
-	<artifactId>JSoup</artifactId>
+	<artifactId>ffmm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
