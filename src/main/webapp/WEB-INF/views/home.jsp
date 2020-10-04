@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Odds</title>
+<title>FFMM</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
 <link rel="stylesheet"
@@ -46,6 +46,32 @@
 				</c:forEach>
 		</table>
 	</div>
+	
+		<div class="container">
+		<table class="table">
+			<thead class="thead_dark">
+				<tr>
+					<th>Rut</th>
+					<th>DV Rut</th>
+					<th>Entidad</th>
+					<th>Administradora</th>
+					<th>Vigencia</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${modelo.fondosmutuos}" var="model">
+					<tr>
+						<td><c:out value="${model.getRut()}" /></td>
+						<td><c:out value="${model.getDv_rut()}" /></td>
+						<td><c:out value="${model.getEntidad()}" /></td>
+						<td><c:out value="${model.getAdministradora()}" /></td>
+						<td><c:out value="${model.getVigencia()}" /></td>
+					</tr>
+				</c:forEach>
+		</table>
+	</div>
+	
+	
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </body>
 </html>

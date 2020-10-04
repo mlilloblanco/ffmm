@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mlb.ffmm.modelos.Apuesta;
 import org.mlb.ffmm.modelos.Ffmm;
+import org.mlb.ffmm.modelos.FondosMutuos;
 import org.mlb.ffmm.servicios.JSoupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,26 +62,6 @@ public class HomeController {
 			return new ModelAndView("home2", "modelo", modelo);
 		}
 
-//        List<Apuesta> apuestasWilliamHill = new ArrayList<>();
-//        
-//        List<String> horas = jsoupService.getHoras();
-//        List<String> partidos = jsoupService.getPartidos();
-//        List<String> oddhome = jsoupService.getOddHome();
-//        List<String> odddraw = jsoupService.getOddDraw();
-//        List<String> oddaway = jsoupService.getOddAway();
-//        
-//        for (int i = 0; i < horas.size(); i++) {
-//        	Apuesta apuesta = new Apuesta();
-//        	apuesta.setFecha(horas.get(i));
-//        	apuesta.setPartido(partidos.get(i));
-//        	apuesta.setOddhome(oddhome.get(i));
-//        	apuesta.setOdddraw(odddraw.get(i));
-//        	apuesta.setOddaway(oddaway.get(i));
-//        	apuestasWilliamHill.add(apuesta);
-//		}
-//        
-//        modelo.addAttribute("apuestasWH", apuestasWilliamHill);
-
 		List<Ffmm> FfmmBCI1 = new ArrayList<>();
 
 		List<Float> cuotasffmm = jsoupService.getCuotaFFMM();
@@ -94,6 +74,9 @@ public class HomeController {
 
 			FfmmBCI1.add(ffmm);
 		}
+		
+		List<FondosMutuos> fondosmutuos = jsoupService.getAllFFMM();
+		modelo.addAttribute("fondosmutuos", fondosmutuos);
 
 		modelo.addAttribute("FfmmBCI", FfmmBCI1);
 		
