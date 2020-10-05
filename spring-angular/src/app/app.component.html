@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>FFMM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand " href="# ">Cuotas FFMM</a>
+        <div class="collapse navbar-collapse " id="navbarSupportedContent ">
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item "><a class="nav-link " href="# ">FONDO MUTUO BCI CARTERA DINÁMICA CONSERVADORA</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container ">
+        <table class="table ">
+            <thead class="thead_dark ">
+                <tr>
+                    <th>Rut</th>
+                    <th>DV Rut</th>
+                    <th>Entidad</th>
+                    <th>Administradora</th>
+                    <th>Vigencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fondomutuo of FFMM ">
+                    <td>{{fondomutuo.rut}}</td>
+                    <td>{{fondomutuo.dv_rut}}</td>
+                    <td>{{fondomutuo.entidad}}</td>
+                    <td>{{fondomutuo.administradora}}</td>
+                    <td>{{fondomutuo.vigencia}}</td>
+                </tr>
+        </table>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js "></script>
+</body>
+
+</html>

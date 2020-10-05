@@ -1,19 +1,28 @@
 package org.mlb.ffmm.controladores;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mlb.ffmm.modelos.FondosMutuos;
 import org.mlb.ffmm.modelos.RespuestaAPI;
+import org.mlb.ffmm.servicios.JSoupService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+//Method to test the angular fetch call.
+@CrossOrigin(origins="http://localhost:4200")  
 @RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class HomeRestController {
 
@@ -22,7 +31,10 @@ public class HomeRestController {
 
     /** Objeto {@link Logger} que contiene los métodos de depuración */
     private static final Logger logger = LogManager.getLogger(HomeRestController.class);
-
+    
+    @Autowired
+    JSoupService jsoupService;
+    
     // Solicitudes GET
     // -----------------------------------------------------------------------------------------
 
@@ -65,5 +77,15 @@ public class HomeRestController {
         // Devolver respuesta
         return ResponseEntity.status(HttpStatus.OK).body(respuesta);
     }
+    
+    @GetMapping(path = "/fondosmutuos")
+    public List<FondosMutuos> getFondosMutuos(HttpServletRequest request) throws IOException {
+        // Depuración
+        logger.info("[API] Solicitud GET: {}", request.getRequestURI());
+
+        List<FondosMutuos> listaffmm = jsoupService.getAllFFMM();
+        return listaffmm;
+    }
+    
 
 }
