@@ -1,14 +1,16 @@
 package org.mlb.ffmm.controladores;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mlb.ffmm.modelos.FondosMutuos;
+import org.mlb.ffmm.modelos.FondoMutuo;
 import org.mlb.ffmm.modelos.RespuestaAPI;
+import org.mlb.ffmm.modelos.Serie;
 import org.mlb.ffmm.servicios.JSoupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,12 +81,21 @@ public class HomeRestController {
     }
     
     @GetMapping(path = "/fondosmutuos")
-    public List<FondosMutuos> getFondosMutuos(HttpServletRequest request) throws IOException {
+    public List<FondoMutuo> getFondosMutuos(HttpServletRequest request) throws IOException {
         // Depuración
         logger.info("[API] Solicitud GET: {}", request.getRequestURI());
 
-        List<FondosMutuos> listaffmm = jsoupService.getAllFFMM();
+        List<FondoMutuo> listaffmm = jsoupService.getAllFFMM();
         return listaffmm;
+    }
+    
+    @GetMapping(path = "/series")
+    public List<Serie> getSeries(HttpServletRequest request) throws IOException, ParseException {
+        // Depuración
+        logger.info("[API] Solicitud GET: {}", request.getRequestURI());
+
+        List<Serie> listaseries= jsoupService.getAllSeries();
+        return listaseries;
     }
     
 

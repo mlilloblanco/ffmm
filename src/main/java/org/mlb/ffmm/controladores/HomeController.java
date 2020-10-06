@@ -1,6 +1,7 @@
 package org.mlb.ffmm.controladores;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mlb.ffmm.modelos.Ffmm;
-import org.mlb.ffmm.modelos.FondosMutuos;
+import org.mlb.ffmm.modelos.FondoMutuo;
+import org.mlb.ffmm.modelos.Serie;
+import org.mlb.ffmm.repositorios.FondosMutuosRepository;
+import org.mlb.ffmm.repositorios.SerieRepository;
 import org.mlb.ffmm.servicios.JSoupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +30,12 @@ public class HomeController {
 
 	@Autowired
 	JSoupService jsoupService;
+
+	@Autowired
+	FondosMutuosRepository fmr;
+
+	@Autowired
+	SerieRepository sr;
 
 	// Constantes
 	// -----------------------------------------------------------------------------------------
@@ -46,10 +56,11 @@ public class HomeController {
 	 *
 	 * @return un objeto {@link String} con la respuesta a la solicitud
 	 * @throws IOException
+	 * @throws ParseException
 	 */
 	@GetMapping(path = { "/", "/{nombre}" })
 	public ModelAndView paginaInicio(@PathVariable Optional<String> nombre, HttpServletRequest request, Model modelo)
-			throws IOException {
+			throws IOException, ParseException {
 		// Depuración
 		logger.info("Solicitud GET: {}", request.getRequestURI());
 
@@ -74,12 +85,19 @@ public class HomeController {
 
 			FfmmBCI1.add(ffmm);
 		}
-		
-		List<FondosMutuos> fondosmutuos = jsoupService.getAllFFMM();
-		modelo.addAttribute("fondosmutuos", fondosmutuos);
 
-		modelo.addAttribute("FfmmBCI", FfmmBCI1);
+		List<FondoMutuo> fondosmutuos = jsoupService.getAllFFMM();
+		// fmr.deleteAllInBatch();
+		// fmr.saveAll(fondosmutuos);
+
+		List<Serie> series = jsoupService.getAllSeries();
+//		sr.deleteAllInBatch();
+//		sr.saveAll(series);
 		
+		modelo.addAttribute("fondosmutuos", fondosmutuos);
+		modelo.addAttribute("series", series);
+		modelo.addAttribute("FfmmBCI", FfmmBCI1);
+
 		// Mostrar página
 		return new ModelAndView("home", "modelo", modelo);
 	}

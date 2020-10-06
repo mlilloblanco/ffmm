@@ -1,13 +1,17 @@
 package org.mlb.ffmm.modelos;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "FONDOSMUTUOS")
-public class FondosMutuos {
+public class FondoMutuo {
 	@Id
 	@Column(name = "rut", nullable = false, unique = true, updatable = false)
 	private int rut;
@@ -16,11 +20,14 @@ public class FondosMutuos {
 	private String administradora;
 	private int vigencia;
 	
-	public FondosMutuos() {
+    @OneToMany(mappedBy = "fondoMutuo", fetch = FetchType.EAGER)
+    private Set<Serie> serie;
+	
+	public FondoMutuo() {
 		super();
 	}
 
-	public FondosMutuos(int rut, String dv_rut, String entidad, String administradora, int vigencia) {
+	public FondoMutuo(int rut, String dv_rut, String entidad, String administradora, int vigencia) {
 		super();
 		this.rut = rut;
 		this.dv_rut = dv_rut;
