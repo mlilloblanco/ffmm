@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mlb.ffmm.modelos.Cuota;
 import org.mlb.ffmm.modelos.Ffmm;
 import org.mlb.ffmm.modelos.FondoMutuo;
 import org.mlb.ffmm.modelos.Serie;
-import org.mlb.ffmm.repositorios.FondosMutuosRepository;
+import org.mlb.ffmm.repositorios.FondoMutuoRepository;
 import org.mlb.ffmm.repositorios.SerieRepository;
 import org.mlb.ffmm.servicios.JSoupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class HomeController {
 	JSoupService jsoupService;
 
 	@Autowired
-	FondosMutuosRepository fmr;
+	FondoMutuoRepository fmr;
 
 	@Autowired
 	SerieRepository sr;
@@ -85,18 +86,22 @@ public class HomeController {
 
 			FfmmBCI1.add(ffmm);
 		}
-
+		// estos deben obviamente cambiar y ser recuperados desde la api generada a partir de la bbdd
 		List<FondoMutuo> fondosmutuos = jsoupService.getAllFFMM();
-		// fmr.deleteAllInBatch();
-		// fmr.saveAll(fondosmutuos);
+//		 fmr.deleteAllInBatch();
+//		 fmr.saveAll(fondosmutuos);
 
 		List<Serie> series = jsoupService.getAllSeries();
 //		sr.deleteAllInBatch();
 //		sr.saveAll(series);
 		
+		List<Cuota> cuotas = jsoupService.getCuotas();
+		System.out.println(cuotas.toString());
+		
 		modelo.addAttribute("fondosmutuos", fondosmutuos);
 		modelo.addAttribute("series", series);
 		modelo.addAttribute("FfmmBCI", FfmmBCI1);
+		
 
 		// Mostrar página
 		return new ModelAndView("home", "modelo", modelo);
