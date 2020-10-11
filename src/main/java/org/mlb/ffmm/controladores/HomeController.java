@@ -96,12 +96,13 @@ public class HomeController {
 //		sr.saveAll(series);
 		
 		List<Cuota> cuotas = jsoupService.getCuotas();
-		System.out.println(cuotas.toString());
+		
+		
 		
 		modelo.addAttribute("fondosmutuos", fondosmutuos);
 		modelo.addAttribute("series", series);
 		modelo.addAttribute("FfmmBCI", FfmmBCI1);
-		
+		modelo.addAttribute("cuotas", cuotas);
 
 		// Mostrar página
 		return new ModelAndView("home", "modelo", modelo);

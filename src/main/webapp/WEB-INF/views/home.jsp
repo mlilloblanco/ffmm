@@ -32,16 +32,20 @@
 		<table class="table">
 			<thead class="thead_dark">
 				<tr>
+				    <th>FFMM</th>
+				    <th>Serie</th>
 					<th>Fecha</th>
 					<th>Cuota</th>
 
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${modelo.FfmmBCI}" var="model">
+				<c:forEach items="${modelo.cuotas}" var="model">
 					<tr>
+					    <td><c:out value="${model.getRut()}" /></td>
+					    <td><c:out value="${model.getSerie()}" /></td>
 						<td><c:out value="${model.getFecha()}" /></td>
-						<td><c:out value="${model.getCuota()}" /></td>
+						<td><c:out value="${model.getValorCuota()}" /></td>
 					</tr>
 				</c:forEach>
 		</table>
