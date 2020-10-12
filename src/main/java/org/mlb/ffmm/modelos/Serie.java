@@ -1,14 +1,15 @@
 package org.mlb.ffmm.modelos;
 
 import java.util.Date;
+import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,30 +24,31 @@ public class Serie {
 	private FondoMutuo fondoMutuo;
 
 	private String dv_rut;
-//	@Column(name = "serie", insertable = false, updatable = false)
-//	private String serie;
 	private String caracteristica;
 	private Date fechaInicio;
 	private Date fechaTermino;
 	private float valorInicioCuota;
 	private String continuadoraDeSerie;
+	
+    @OneToMany(mappedBy = "serie", fetch = FetchType.EAGER)
+    private Set<Cuota> cuotas;
 
 	public Serie() {
 		super();
 	}
 
-	public Serie(SerieId id, FondoMutuo fondoMutuo, String dv_rut, String caracteristica,
-			Date fechaInicio, Date fechaTermino, float valorInicioCuota, String continuadoraDeSerie) {
+	public Serie(SerieId id, FondoMutuo fondoMutuo, String dv_rut, String caracteristica, Date fechaInicio,
+			Date fechaTermino, float valorInicioCuota, String continuadoraDeSerie, Set<Cuota> cuotas) {
 		super();
 		this.id = id;
 		this.fondoMutuo = fondoMutuo;
 		this.dv_rut = dv_rut;
-//		this.serie = serie;
 		this.caracteristica = caracteristica;
 		this.fechaInicio = fechaInicio;
 		this.fechaTermino = fechaTermino;
 		this.valorInicioCuota = valorInicioCuota;
 		this.continuadoraDeSerie = continuadoraDeSerie;
+		this.cuotas = cuotas;
 	}
 
 	public SerieId getId() {
@@ -72,14 +74,6 @@ public class Serie {
 	public void setDv_rut(String dv_rut) {
 		this.dv_rut = dv_rut;
 	}
-
-//	public String getSerie() {
-//		return serie;
-//	}
-//
-//	public void setSerie(String serie) {
-//		this.serie = serie;
-//	}
 
 	public String getCaracteristica() {
 		return caracteristica;
@@ -119,6 +113,14 @@ public class Serie {
 
 	public void setContinuadoraDeSerie(String continuadoraDeSerie) {
 		this.continuadoraDeSerie = continuadoraDeSerie;
+	}
+
+	public Set<Cuota> getCuotas() {
+		return cuotas;
+	}
+
+	public void setCuotas(Set<Cuota> cuotas) {
+		this.cuotas = cuotas;
 	}
 
 	

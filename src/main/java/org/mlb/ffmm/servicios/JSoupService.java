@@ -14,6 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.mlb.ffmm.modelos.Cuota;
+import org.mlb.ffmm.modelos.CuotaId;
 import org.mlb.ffmm.modelos.FondoMutuo;
 import org.mlb.ffmm.modelos.Serie;
 import org.mlb.ffmm.modelos.SerieId;
@@ -198,6 +199,19 @@ public class JSoupService {
 		Float numeroCuotasRescatadas;
 		Float numeroCuotasCirculacion;
 		Float valorCuota;
+		Float patrimonioNeto;
+		Float activoTotal;
+		Integer numeroDeParticipes;
+		Integer numeroDeParticipesInst;
+		Integer fondosPension;
+		Float remuneracionFijaSocAdmin;
+		Float remuneracionVariableSocAdmin;
+		Float gastosAfectosIVA;
+		Float gastosNoAfectosIVA;
+		Float comisionDeColocacionCobradaAlMomentoDeLaInversion;
+		Float comisionDeColocacionCobradaAlMomentoDelRescate;
+		Float factorDeRescate;
+		Float factorDeAjuste;
 
 		for (int j = 0; j < series.size(); j++) {
 
@@ -220,7 +234,7 @@ public class JSoupService {
 																			// body
 			Element table = doc.select("table").get(0); // select the first table.
 			Elements rows = table.select("tr");
-			// System.out.println("rows series:" + rows.size());
+			
 			if (rows.size() > 2) {
 				for (int i = 2; i < rows.size(); i++) { // first row is serie of ffmm and second row is the col names so
 														// skip it.
@@ -270,29 +284,137 @@ public class JSoupService {
 					}
 
 					String patrimonioNetoText = cols.get(5).text();
+					
+					if (!patrimonioNetoText.isBlank() || !patrimonioNetoText.isEmpty()) {
+						patrimonioNeto = Float.valueOf(patrimonioNetoText.replace(".", "").replace(",","."));
+					} else {
+						patrimonioNeto = 0.0f;
+					}
+					
+					
 					String activoTotalText = cols.get(6).text();
+					
+					if (!activoTotalText.isBlank() || !activoTotalText.isEmpty()) {
+						activoTotal = Float.valueOf(activoTotalText.replace(".", "").replace(",","."));
+					} else {
+						activoTotal = 0.0f;
+					}
+					
 					String numeroDeParticipesText = cols.get(7).text();
+					
+					if (!numeroDeParticipesText.isBlank() || !numeroDeParticipesText.isEmpty()) {
+						numeroDeParticipes = Integer.valueOf(numeroDeParticipesText.replace(".", ""));
+					} else {
+						numeroDeParticipes = 0;
+					}
+					
 					String numeroDeParticipesInstText = cols.get(8).text();
+					
+					if (!numeroDeParticipesInstText.isBlank() || !numeroDeParticipesInstText.isEmpty()) {
+						numeroDeParticipesInst = Integer.valueOf(numeroDeParticipesInstText.replace(".", ""));
+					} else {
+						numeroDeParticipesInst = 0;
+					}
+					
 					String fondosPensionText = cols.get(9).text();
+					
+					if (fondosPensionText.equals("S")) {
+						fondosPension = 1;
+					} else {
+						fondosPension = 0;
+					}
+					
 					String remuneracionFijaSocAdminText = cols.get(10).text();
+					
+					if (!remuneracionFijaSocAdminText.isBlank() || !remuneracionFijaSocAdminText.isEmpty()) {
+						remuneracionFijaSocAdmin = Float.valueOf(remuneracionFijaSocAdminText.replace(".", "").replace(",","."));
+					} else {
+						remuneracionFijaSocAdmin = 0.0f;
+					}
+					
 					String remuneracionVariableSocAdminText = cols.get(11).text();
+					
+					if (!remuneracionVariableSocAdminText.isBlank() || !remuneracionVariableSocAdminText.isEmpty()) {
+						remuneracionVariableSocAdmin = Float.valueOf(remuneracionVariableSocAdminText.replace(".", "").replace(",","."));
+					} else {
+						remuneracionVariableSocAdmin = 0.0f;
+					}
+					
 					String gastosAfectosIVAText = cols.get(12).text();
+					
+					if (!gastosAfectosIVAText.isBlank() || !gastosAfectosIVAText.isEmpty()) {
+						gastosAfectosIVA = Float.valueOf(gastosAfectosIVAText.replace(".", "").replace(",","."));
+					} else {
+						gastosAfectosIVA = 0.0f;
+					}
+					
 					String gastosNoAfectosIVAText = cols.get(13).text();
+					
+					if (!gastosNoAfectosIVAText.isBlank() || !gastosNoAfectosIVAText.isEmpty()) {
+						gastosNoAfectosIVA = Float.valueOf(gastosNoAfectosIVAText.replace(".", "").replace(",","."));
+					} else {
+						gastosNoAfectosIVA = 0.0f;
+					}
+					
 					String comisionDeColocacionCobradaAlMomentoDeLaInversionText = cols.get(14).text();
+					
+					if (!comisionDeColocacionCobradaAlMomentoDeLaInversionText.isBlank() || !comisionDeColocacionCobradaAlMomentoDeLaInversionText.isEmpty()) {
+						comisionDeColocacionCobradaAlMomentoDeLaInversion = Float.valueOf(comisionDeColocacionCobradaAlMomentoDeLaInversionText.replace(".", "").replace(",","."));
+					} else {
+						comisionDeColocacionCobradaAlMomentoDeLaInversion = 0.0f;
+					}
+					
 					String comisionDeColocacionCobradaAlMomentoDelRescateText = cols.get(15).text();
+					
+					if (!comisionDeColocacionCobradaAlMomentoDelRescateText.isBlank() || !comisionDeColocacionCobradaAlMomentoDelRescateText.isEmpty()) {
+						comisionDeColocacionCobradaAlMomentoDelRescate = Float.valueOf(comisionDeColocacionCobradaAlMomentoDelRescateText.replace(".", "").replace(",","."));
+					} else {
+						comisionDeColocacionCobradaAlMomentoDelRescate = 0.0f;
+					}
+					
 					String factorDeRescateText = cols.get(16).text();
+					
+					if (!factorDeRescateText.isBlank() || !factorDeRescateText.isEmpty()) {
+						factorDeRescate = Float.valueOf(factorDeRescateText.replace(".", "").replace(",","."));
+					} else {
+						factorDeRescate = 0.0f;
+					}
+					
 					String factorDeAjusteText = cols.get(17).text();
+					
+					if (!factorDeAjusteText.isBlank() || !factorDeAjusteText.isEmpty()) {
+						factorDeAjuste = Float.valueOf(factorDeAjusteText.replace(".", "").replace(",","."));
+					} else {
+						factorDeAjuste = 0.0f;
+					}
+					
 
 					Cuota cuota = new Cuota();
-
-					cuota.setRut(rut);
+					CuotaId cuotaid = new CuotaId();
+					
+					cuotaid.setRut(rut);
+					cuotaid.setSerie(serie);
+					cuotaid.setFecha(fecha);
+					
+					cuota.setId(cuotaid);
 					cuota.setDv_rut(dvRut);
-					cuota.setSerie(serie);
-					cuota.setFecha(fecha);
 					cuota.setNumeroCuotasAportadas(numeroCuotasAportadas);
 					cuota.setNumeroCuotasRescatadas(numeroCuotasRescatadas);
 					cuota.setNumeroCuotasCirculacion(numeroCuotasCirculacion);
 					cuota.setValorCuota(valorCuota);
+					cuota.setPatrimonioNeto(patrimonioNeto);
+					cuota.setActivoTotal(activoTotal);
+					cuota.setNumeroDeParticipes(numeroDeParticipes);
+					cuota.setNumeroDeParticipesInst(numeroDeParticipesInst);
+					cuota.setFondosPension(fondosPension);
+					cuota.setRemuneracionFijaSocAdmin(remuneracionFijaSocAdmin);
+					cuota.setRemuneracionVariableSocAdmin(remuneracionVariableSocAdmin);
+					cuota.setGastosAfectosIVA(gastosAfectosIVA);
+					cuota.setGastosNoAfectosIVA(gastosNoAfectosIVA);
+					cuota.setComisionDeColocacionCobradaAlMomentoDeLaInversion(comisionDeColocacionCobradaAlMomentoDeLaInversion);
+					cuota.setComisionDeColocacionCobradaAlMomentoDelRescate(comisionDeColocacionCobradaAlMomentoDelRescate);
+					cuota.setFactorDeRescate(factorDeRescate);
+					cuota.setFactorDeAjuste(factorDeAjuste);
 					cuotas.add(cuota);
 				}
 			}

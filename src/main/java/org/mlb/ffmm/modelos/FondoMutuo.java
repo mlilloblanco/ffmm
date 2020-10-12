@@ -22,18 +22,20 @@ public class FondoMutuo {
 	
     @OneToMany(mappedBy = "fondoMutuo", fetch = FetchType.EAGER)
     private Set<Serie> serie;
+
 	
 	public FondoMutuo() {
 		super();
 	}
 
-	public FondoMutuo(int rut, String dv_rut, String entidad, String administradora, int vigencia) {
+	public FondoMutuo(int rut, String dv_rut, String entidad, String administradora, int vigencia, Set<Serie> serie) {
 		super();
 		this.rut = rut;
 		this.dv_rut = dv_rut;
 		this.entidad = entidad;
 		this.administradora = administradora;
 		this.vigencia = vigencia;
+		this.serie = serie;
 	}
 
 	public int getRut() {
@@ -75,8 +77,13 @@ public class FondoMutuo {
 	public void setVigencia(int vigencia) {
 		this.vigencia = vigencia;
 	}
-	
-	
-	
+
+	public Set<Serie> getSerie() {
+		return serie;
+	}
+
+	public void setSerie(Set<Serie> serie) {
+		this.serie = serie;
+	}
 	
 }

@@ -14,6 +14,7 @@ import org.mlb.ffmm.modelos.Cuota;
 import org.mlb.ffmm.modelos.Ffmm;
 import org.mlb.ffmm.modelos.FondoMutuo;
 import org.mlb.ffmm.modelos.Serie;
+import org.mlb.ffmm.repositorios.CuotaRepository;
 import org.mlb.ffmm.repositorios.FondoMutuoRepository;
 import org.mlb.ffmm.repositorios.SerieRepository;
 import org.mlb.ffmm.servicios.JSoupService;
@@ -37,6 +38,9 @@ public class HomeController {
 
 	@Autowired
 	SerieRepository sr;
+	
+	@Autowired
+	CuotaRepository cr;
 
 	// Constantes
 	// -----------------------------------------------------------------------------------------
@@ -74,34 +78,35 @@ public class HomeController {
 			return new ModelAndView("home2", "modelo", modelo);
 		}
 
-		List<Ffmm> FfmmBCI1 = new ArrayList<>();
-
-		List<Float> cuotasffmm = jsoupService.getCuotaFFMM();
-		List<String> fechasffmm = jsoupService.getFechaFFMM();
-
-		for (int i = 0; i < cuotasffmm.size(); i++) {
-			Ffmm ffmm = new Ffmm();
-			ffmm.setFecha(fechasffmm.get(i));
-			ffmm.setCuota(cuotasffmm.get(i));
-
-			FfmmBCI1.add(ffmm);
-		}
+//		List<Ffmm> FfmmBCI1 = new ArrayList<>();
+//
+//		List<Float> cuotasffmm = jsoupService.getCuotaFFMM();
+//		List<String> fechasffmm = jsoupService.getFechaFFMM();
+//
+//		for (int i = 0; i < cuotasffmm.size(); i++) {
+//			Ffmm ffmm = new Ffmm();
+//			ffmm.setFecha(fechasffmm.get(i));
+//			ffmm.setCuota(cuotasffmm.get(i));
+//
+//			FfmmBCI1.add(ffmm);
+//		}
 		// estos deben obviamente cambiar y ser recuperados desde la api generada a partir de la bbdd
-		List<FondoMutuo> fondosmutuos = jsoupService.getAllFFMM();
+//		List<FondoMutuo> fondosmutuos = jsoupService.getAllFFMM();
 //		 fmr.deleteAllInBatch();
 //		 fmr.saveAll(fondosmutuos);
 
-		List<Serie> series = jsoupService.getAllSeries();
+//		List<Serie> series = jsoupService.getAllSeries();
 //		sr.deleteAllInBatch();
 //		sr.saveAll(series);
 		
 		List<Cuota> cuotas = jsoupService.getCuotas();
+//		cr.deleteAllInBatch();
+//		cr.saveAll(cuotas);
 		
 		
-		
-		modelo.addAttribute("fondosmutuos", fondosmutuos);
-		modelo.addAttribute("series", series);
-		modelo.addAttribute("FfmmBCI", FfmmBCI1);
+//		modelo.addAttribute("fondosmutuos", fondosmutuos);
+//		modelo.addAttribute("series", series);
+//		modelo.addAttribute("FfmmBCI", FfmmBCI1);
 		modelo.addAttribute("cuotas", cuotas);
 
 		// Mostrar página

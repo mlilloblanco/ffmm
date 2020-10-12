@@ -1,12 +1,28 @@
 package org.mlb.ffmm.modelos;
 
-import java.util.Date;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "CUOTAS")
 public class Cuota {
-	private int rut;
+	@EmbeddedId
+	private CuotaId id;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@MapsId(value = "id")
+	@JoinColumns({ @JoinColumn(name = "rut", referencedColumnName = "rut"),
+			@JoinColumn(name = "serie", referencedColumnName = "serie") })
+	private Serie serie;
+
 	private String dv_rut;
-	private String serie;
-	private Date fecha;
+
 	private float numeroCuotasAportadas;
 	private float numeroCuotasRescatadas;
 	private float numeroCuotasCirculacion;
@@ -15,7 +31,7 @@ public class Cuota {
 	private float activoTotal;
 	private int numeroDeParticipes;
 	private int numeroDeParticipesInst;
-	private boolean fondosPension;
+	private int fondosPension;
 	private float remuneracionFijaSocAdmin;
 	private float remuneracionVariableSocAdmin;
 	private float gastosAfectosIVA;
@@ -24,22 +40,21 @@ public class Cuota {
 	private float comisionDeColocacionCobradaAlMomentoDelRescate;
 	private float factorDeRescate;
 	private float factorDeAjuste;
-	
+
 	public Cuota() {
 		super();
 	}
 
-	public Cuota(int rut, String dv_rut, String serie, Date fecha, float numeroCuotasAportadas,
-			float numeroCuotasRescatadas, float numeroCuotasCirculacion, float valorCuota, float patrimonioNeto,
-			float activoTotal, int numeroDeParticipes, int numeroDeParticipesInst, boolean fondosPension,
-			float remuneracionFijaSocAdmin, float remuneracionVariableSocAdmin, float gastosAfectosIVA,
-			float gastosNoAfectosIVA, float comisionDeColocacionCobradaAlMomentoDeLaInversion,
+	public Cuota(CuotaId id, Serie serie, String dv_rut, float numeroCuotasAportadas, float numeroCuotasRescatadas,
+			float numeroCuotasCirculacion, float valorCuota, float patrimonioNeto, float activoTotal,
+			int numeroDeParticipes, int numeroDeParticipesInst, int fondosPension, float remuneracionFijaSocAdmin,
+			float remuneracionVariableSocAdmin, float gastosAfectosIVA, float gastosNoAfectosIVA,
+			float comisionDeColocacionCobradaAlMomentoDeLaInversion,
 			float comisionDeColocacionCobradaAlMomentoDelRescate, float factorDeRescate, float factorDeAjuste) {
 		super();
-		this.rut = rut;
-		this.dv_rut = dv_rut;
+		this.id = id;
 		this.serie = serie;
-		this.fecha = fecha;
+		this.dv_rut = dv_rut;
 		this.numeroCuotasAportadas = numeroCuotasAportadas;
 		this.numeroCuotasRescatadas = numeroCuotasRescatadas;
 		this.numeroCuotasCirculacion = numeroCuotasCirculacion;
@@ -59,12 +74,20 @@ public class Cuota {
 		this.factorDeAjuste = factorDeAjuste;
 	}
 
-	public int getRut() {
-		return rut;
+	public CuotaId getId() {
+		return id;
 	}
 
-	public void setRut(int rut) {
-		this.rut = rut;
+	public void setId(CuotaId id) {
+		this.id = id;
+	}
+
+	public Serie getSerie() {
+		return serie;
+	}
+
+	public void setSerie(Serie serie) {
+		this.serie = serie;
 	}
 
 	public String getDv_rut() {
@@ -73,22 +96,6 @@ public class Cuota {
 
 	public void setDv_rut(String dv_rut) {
 		this.dv_rut = dv_rut;
-	}
-
-	public String getSerie() {
-		return serie;
-	}
-
-	public void setSerie(String serie) {
-		this.serie = serie;
-	}
-
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
 	}
 
 	public float getNumeroCuotasAportadas() {
@@ -155,11 +162,11 @@ public class Cuota {
 		this.numeroDeParticipesInst = numeroDeParticipesInst;
 	}
 
-	public boolean isFondosPension() {
+	public int getFondosPension() {
 		return fondosPension;
 	}
 
-	public void setFondosPension(boolean fondosPension) {
+	public void setFondosPension(int fondosPension) {
 		this.fondosPension = fondosPension;
 	}
 
@@ -208,7 +215,8 @@ public class Cuota {
 		return comisionDeColocacionCobradaAlMomentoDelRescate;
 	}
 
-	public void setComisionDeColocacionCobradaAlMomentoDelRescate(float comisionDeColocacionCobradaAlMomentoDelRescate) {
+	public void setComisionDeColocacionCobradaAlMomentoDelRescate(
+			float comisionDeColocacionCobradaAlMomentoDelRescate) {
 		this.comisionDeColocacionCobradaAlMomentoDelRescate = comisionDeColocacionCobradaAlMomentoDelRescate;
 	}
 
@@ -227,5 +235,5 @@ public class Cuota {
 	public void setFactorDeAjuste(float factorDeAjuste) {
 		this.factorDeAjuste = factorDeAjuste;
 	}
-	
+
 }
