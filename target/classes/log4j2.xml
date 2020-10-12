@@ -59,10 +59,15 @@
     <Loggers>
         <!-- Aplicación -->
         <!-- additivity="false" permite deshacerse de los logs duplicados -->
-        <Logger name="org.mlb.JSoup" level="debug" additivity="false">
+        <Logger name="org.mlb.ffmm" level="debug" additivity="false">
             <AppenderRef ref="consola" />
             <AppenderRef ref="logAplicacion" />
         </Logger>
+        
+        <!-- Log everything in hibernate -->
+      	<Logger name="org.hibernate.engine.jdbc.batch.internal.BatchingBatch" level="debug" additivity="false">
+        	<AppenderRef ref="consola" />
+      	</Logger>
 
         <!-- Spring Framework -->
         <Logger name="org.springframework" level="error" additivity="false">

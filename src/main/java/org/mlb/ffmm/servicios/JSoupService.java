@@ -218,11 +218,11 @@ public class JSoupService {
 			String inicioSerieUrl = "https://www.cmfchile.cl/institucional/inc/valores_cuota/valor_serie.php?";
 			String v1 = "v1=" + translateToCMFDictionary(series.get(j).getId().getSerie()) + "&";
 			String v2 = "v2=" + translateToCMFDictionary(Integer.toString(series.get(j).getId().getRut())) + "&";
-			String v3 = "v3=" + translateToCMFDictionary("2020") + "&";// año inicio
-			String v4 = "v4=" + translateToCMFDictionary("10") + "&";//mes inicio
-			String v5 = "v5=" + translateToCMFDictionary("08") + "&";//dia inicio
-			String v6 = "v6=" + translateToCMFDictionary("2020") + "&";//año fin
-			String v7 = "v7=" + translateToCMFDictionary("12") + "&";//mes fin
+			String v3 = "v3=" + translateToCMFDictionary("2015") + "&";// año inicio
+			String v4 = "v4=" + translateToCMFDictionary("01") + "&";//mes inicio
+			String v5 = "v5=" + translateToCMFDictionary("01") + "&";//dia inicio
+			String v6 = "v6=" + translateToCMFDictionary("2015") + "&";//año fin
+			String v7 = "v7=" + translateToCMFDictionary("01") + "&";//mes fin
 			String v8 = "v8=" + translateToCMFDictionary("31") + "&";//dia fin
 			String v9 = "v9=" + translateToCMFDictionary("Pesos de Chile") + "&";
 			String v10 = "v10=" + translateToCMFDictionary("RGFMU") + "&";

@@ -101,8 +101,7 @@ public class HomeController {
 		
 		List<Cuota> cuotas = jsoupService.getCuotas();
 //		cr.deleteAllInBatch();
-//		cr.saveAll(cuotas);
-		
+		cr.saveAll(cuotas);
 		
 //		modelo.addAttribute("fondosmutuos", fondosmutuos);
 //		modelo.addAttribute("series", series);
