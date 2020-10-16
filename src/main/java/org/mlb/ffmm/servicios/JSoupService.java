@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -381,56 +382,59 @@ public class JSoupService {
 
 	}
 
+    private static final Map<Character, String> diccionario  = new HashMap<>();;
+    static {
+        Map<Character, String> dicc = diccionario;
+        dicc.put('0', "V864A");
+		dicc.put('1', "J35MN");
+		dicc.put('2', "4ABCI");
+		dicc.put('3', "S8IYM");
+		dicc.put('4', "ABPRX");
+		dicc.put('5', "ISQAK");
+		dicc.put('6', "EHITB");
+		dicc.put('7', "6BERY");
+		dicc.put('8', "64IBM");
+		dicc.put('9', "LPKA0");
+		dicc.put('A', "C1KB5");
+		dicc.put('B', "75ALM");
+		dicc.put('C', "JKT99");
+		dicc.put('D', "63509");
+		dicc.put('E', "LN78A");
+		dicc.put('F', "99KWA");
+		dicc.put('G', "48BCX");
+		dicc.put('H', "QH5LB");
+		dicc.put('I', "MLXL7");
+		dicc.put('J', "27KNS");
+		dicc.put('K', "49ABC");
+		dicc.put('L', "10663");
+		dicc.put('M', "EF88B");
+		dicc.put('N', "SAC9L");
+		dicc.put('O', "IE7IX");
+		dicc.put('P', "37G70");
+		dicc.put('Q', "CS599");
+		dicc.put('R', "21QYE");
+		dicc.put('S', "GL687");
+		dicc.put('T', "646OB");
+		dicc.put('U', "WM6YB");
+		dicc.put('V', "42S6C");
+		dicc.put('W', "D8373");
+		dicc.put('X', "58X6X");
+		dicc.put('Z', "N296A");
+		dicc.put('-', "LP670");
+		dicc.put('/', "OL666");
+		dicc.put(' ', "OL188");
+		dicc.put('d', "63409");
+		dicc.put('e', "LN68A");
+		dicc.put('h', "QHFLB");
+		dicc.put('i', "MLXL4");
+		dicc.put('l', "10163");
+		dicc.put('o', "IEAIX");
+		dicc.put('p', "37GH0");
+		dicc.put('s', "GLD87");
+    }
+
+	
 	public String translateToCMFDictionary(String texto) throws IOException, ParseException {
-
-		Map<Character, String> diccionario = new HashMap<Character, String>();
-
-		diccionario.put('0', "V864A");
-		diccionario.put('1', "J35MN");
-		diccionario.put('2', "4ABCI");
-		diccionario.put('3', "S8IYM");
-		diccionario.put('4', "ABPRX");
-		diccionario.put('5', "ISQAK");
-		diccionario.put('6', "EHITB");
-		diccionario.put('7', "6BERY");
-		diccionario.put('8', "64IBM");
-		diccionario.put('9', "LPKA0");
-		diccionario.put('A', "C1KB5");
-		diccionario.put('B', "75ALM");
-		diccionario.put('C', "JKT99");
-		diccionario.put('D', "63509");
-		diccionario.put('E', "LN78A");
-		diccionario.put('F', "99KWA");
-		diccionario.put('G', "48BCX");
-		diccionario.put('H', "QH5LB");
-		diccionario.put('I', "MLXL7");
-		diccionario.put('J', "27KNS");
-		diccionario.put('K', "49ABC");
-		diccionario.put('L', "10663");
-		diccionario.put('M', "EF88B");
-		diccionario.put('N', "SAC9L");
-		diccionario.put('O', "IE7IX");
-		diccionario.put('P', "37G70");
-		diccionario.put('Q', "CS599");
-		diccionario.put('R', "21QYE");
-		diccionario.put('S', "GL687");
-		diccionario.put('T', "646OB");
-		diccionario.put('U', "WM6YB");
-		diccionario.put('V', "42S6C");
-		diccionario.put('W', "D8373");
-		diccionario.put('X', "58X6X");
-		diccionario.put('Z', "N296A");
-		diccionario.put('-', "LP670");
-		diccionario.put('/', "OL666");
-		diccionario.put(' ', "OL188");
-		diccionario.put('d', "63409");
-		diccionario.put('e', "LN68A");
-		diccionario.put('h', "QHFLB");
-		diccionario.put('i', "MLXL4");
-		diccionario.put('l', "10163");
-		diccionario.put('o', "IEAIX");
-		diccionario.put('p', "37GH0");
-		diccionario.put('s', "GLD87");
 
 		String textoTraducido = "";
 
