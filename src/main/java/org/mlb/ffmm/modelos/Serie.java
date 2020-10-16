@@ -32,8 +32,8 @@ public class Serie {
 	private float valorInicioCuota;
 	private String continuadoraDeSerie;
 	@JsonIgnore
-    @OneToMany(mappedBy = "serie", fetch = FetchType.LAZY)
-    private Set<Cuota> cuotas;
+	@OneToMany(mappedBy = "serie", fetch = FetchType.LAZY)
+	private Set<Cuota> cuotas;
 
 	public Serie() {
 		super();
@@ -125,5 +125,4 @@ public class Serie {
 		this.cuotas = cuotas;
 	}
 
-	
 }

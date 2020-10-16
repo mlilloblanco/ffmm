@@ -33,10 +33,20 @@
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />
             </Policies>
         </RollingFile>
-
-        <!-- Archivo: Spring Framework -->
+        
+                <!-- Archivo: Spring Framework -->
         <RollingFile name="logFramework" fileName="${ruta}/spring-framework.log"
             filePattern="${ruta}/spring-framework_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${patron}" />
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <!-- Archivo: Hibernate -->
+        <RollingFile name="logHibernate" fileName="${ruta}/hibernate.log"
+            filePattern="${ruta}/hibernate_%d{yyyy-MM-dd}.log">
             <PatternLayout pattern="${patron}" />
             <Policies>
                 <OnStartupTriggeringPolicy />
@@ -67,6 +77,7 @@
         <!-- Log everything in hibernate -->
       	<Logger name="org.hibernate.engine.jdbc.batch.internal.BatchingBatch" level="debug" additivity="false">
         	<AppenderRef ref="consola" />
+        	<AppenderRef ref="logHibernate" />
       	</Logger>
 
         <!-- Spring Framework -->

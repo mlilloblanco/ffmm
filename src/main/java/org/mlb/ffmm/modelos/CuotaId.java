@@ -13,10 +13,10 @@ public class CuotaId implements Serializable {
 
 	@Column(name = "rut")
 	private int rut;
-	
+
 	@Column(name = "serie")
 	private String serie;
-	
+
 	@Column(name = "fecha")
 	private Date fecha;
 
@@ -93,6 +93,4 @@ public class CuotaId implements Serializable {
 		return true;
 	}
 
-	
-	
 }

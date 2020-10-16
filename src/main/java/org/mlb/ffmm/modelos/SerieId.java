@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+
 @Embeddable
 public class SerieId implements Serializable {
 
@@ -11,7 +12,7 @@ public class SerieId implements Serializable {
 
 	@Column(name = "rut")
 	private int rut;
-	
+
 	@Column(name = "serie")
 	private String serie;
 
@@ -72,6 +73,5 @@ public class SerieId implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }

@@ -22,10 +22,9 @@ public class FondoMutuo {
 	private String administradora;
 	private int vigencia;
 	@JsonIgnore
-    @OneToMany(mappedBy = "fondoMutuo", fetch = FetchType.LAZY)
-    private Set<Serie> serie;
+	@OneToMany(mappedBy = "fondoMutuo", fetch = FetchType.LAZY)
+	private Set<Serie> serie;
 
-	
 	public FondoMutuo() {
 		super();
 	}
@@ -87,5 +86,5 @@ public class FondoMutuo {
 	public void setSerie(Set<Serie> serie) {
 		this.serie = serie;
 	}
-	
+
 }
