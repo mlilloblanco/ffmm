@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SerieRepository extends JpaRepository<Serie, SerieId> {
 
-	@Query(value="select *\r\n" + 
+	@Query(value="select s.*\r\n" + 
 			"from series s \r\n" + 
 			"inner join fondosmutuos fm \r\n" + 
 			"on s.rut = fm.rut \r\n" + 

@@ -190,10 +190,11 @@ public class JSoupService {
 	}
 
 	// get price of all series of all investment funds
-	public List<Cuota> getCuotas() throws IOException, ParseException {
+	public List<Cuota> getCuotas(String anoInicio, String mesInicio, String diaInicio, String anoFin, String mesFin, String diaFin) throws IOException, ParseException {
 
 		List<Serie> series = sr.findByVigencia(1);
 		List<Cuota> cuotas = new ArrayList<>();
+		
 		Date fecha;
 		Float numeroCuotasAportadas;
 		Float numeroCuotasRescatadas;
@@ -212,22 +213,25 @@ public class JSoupService {
 		Float comisionDeColocacionCobradaAlMomentoDelRescate;
 		Float factorDeRescate;
 		Float factorDeAjuste;
-
+		
+		String v3 = "v3=" + translateToCMFDictionary(anoInicio) + "&";// año inicio
+		String v4 = "v4=" + translateToCMFDictionary(mesInicio) + "&";//mes inicio
+		String v5 = "v5=" + translateToCMFDictionary(diaInicio) + "&";//dia inicio
+		String v6 = "v6=" + translateToCMFDictionary(anoFin) + "&";//año fin
+		String v7 = "v7=" + translateToCMFDictionary(mesFin) + "&";//mes fin
+		String v8 = "v8=" + translateToCMFDictionary(diaFin) + "&";//dia fin
+		String v9 = "v9=" + translateToCMFDictionary("Pesos de Chile") + "&";
+		String v10 = "v10=" + translateToCMFDictionary("RGFMU") + "&";
+		String v11 = "v11=" + translateToCMFDictionary("desp1") + "&";
+		String v12 = "v12=" + translateToCMFDictionary("desp2");
+		String inicioSerieUrl = "https://www.cmfchile.cl/institucional/inc/valores_cuota/valor_serie.php?";
+		
 		for (int j = 0; j < series.size(); j++) {
-
-			String inicioSerieUrl = "https://www.cmfchile.cl/institucional/inc/valores_cuota/valor_serie.php?";
+			
+			
 			String v1 = "v1=" + translateToCMFDictionary(series.get(j).getId().getSerie()) + "&";
 			String v2 = "v2=" + translateToCMFDictionary(Integer.toString(series.get(j).getId().getRut())) + "&";
-			String v3 = "v3=" + translateToCMFDictionary("2015") + "&";// año inicio
-			String v4 = "v4=" + translateToCMFDictionary("01") + "&";//mes inicio
-			String v5 = "v5=" + translateToCMFDictionary("01") + "&";//dia inicio
-			String v6 = "v6=" + translateToCMFDictionary("2015") + "&";//año fin
-			String v7 = "v7=" + translateToCMFDictionary("01") + "&";//mes fin
-			String v8 = "v8=" + translateToCMFDictionary("31") + "&";//dia fin
-			String v9 = "v9=" + translateToCMFDictionary("Pesos de Chile") + "&";
-			String v10 = "v10=" + translateToCMFDictionary("RGFMU") + "&";
-			String v11 = "v11=" + translateToCMFDictionary("desp1") + "&";
-			String v12 = "v12=" + translateToCMFDictionary("desp2");
+
 
 			String serieUrl = inicioSerieUrl + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11 + v12;
 			Document doc = Jsoup.connect(serieUrl).maxBodySize(0).get(); // maxbodysize to read more than 2MB from the

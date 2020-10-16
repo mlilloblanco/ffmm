@@ -99,7 +99,7 @@ public class HomeController {
 //		sr.deleteAllInBatch();
 //		sr.saveAll(series);
 		
-		List<Cuota> cuotas = jsoupService.getCuotas();
+		List<Cuota> cuotas = jsoupService.getCuotas("2020", "07", "01","2020","12","31");
 //		cr.deleteAllInBatch();
 		cr.saveAll(cuotas);
 		

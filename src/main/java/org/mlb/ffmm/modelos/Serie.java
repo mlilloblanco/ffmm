@@ -30,7 +30,7 @@ public class Serie {
 	private float valorInicioCuota;
 	private String continuadoraDeSerie;
 	
-    @OneToMany(mappedBy = "serie", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "serie", fetch = FetchType.LAZY)
     private Set<Cuota> cuotas;
 
 	public Serie() {

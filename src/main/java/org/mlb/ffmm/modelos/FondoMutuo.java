@@ -20,7 +20,7 @@ public class FondoMutuo {
 	private String administradora;
 	private int vigencia;
 	
-    @OneToMany(mappedBy = "fondoMutuo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "fondoMutuo", fetch = FetchType.LAZY)
     private Set<Serie> serie;
 
 	
