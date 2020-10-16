@@ -13,7 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @SpringJUnitWebConfig(locations = { "file:src/main/webapp/WEB-INF/spring/appServlet-context.xml",
         "file:src/main/webapp/WEB-INF/spring/root-context.xml" })
-class HomeRestControllerTest {
+class FondoMutuoRestControllerTest {
 
     private MockMvc mvc;
 

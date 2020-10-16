@@ -2,7 +2,6 @@ package org.mlb.ffmm.controladores;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,9 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mlb.ffmm.modelos.Cuota;
-import org.mlb.ffmm.modelos.Ffmm;
-import org.mlb.ffmm.modelos.FondoMutuo;
-import org.mlb.ffmm.modelos.Serie;
 import org.mlb.ffmm.repositorios.CuotaRepository;
 import org.mlb.ffmm.repositorios.FondoMutuoRepository;
 import org.mlb.ffmm.repositorios.SerieRepository;
@@ -99,9 +95,9 @@ public class HomeController {
 //		sr.deleteAllInBatch();
 //		sr.saveAll(series);
 		
-		List<Cuota> cuotas = jsoupService.getCuotas("2020", "07", "01","2020","12","31");
+		List<Cuota> cuotas = jsoupService.getCuotas("2020", "10", "15","2020","12","31");
 //		cr.deleteAllInBatch();
-		cr.saveAll(cuotas);
+//		cr.saveAll(cuotas);
 		
 //		modelo.addAttribute("fondosmutuos", fondosmutuos);
 //		modelo.addAttribute("series", series);

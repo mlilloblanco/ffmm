@@ -192,7 +192,7 @@ public class JSoupService {
 	// get price of all series of all investment funds
 	public List<Cuota> getCuotas(String anoInicio, String mesInicio, String diaInicio, String anoFin, String mesFin, String diaFin) throws IOException, ParseException {
 
-		List<Serie> series = sr.findByVigencia(1);
+		List<Serie> series = sr.findSerieByVigencia(1);
 		List<Cuota> cuotas = new ArrayList<>();
 		
 		Date fecha;

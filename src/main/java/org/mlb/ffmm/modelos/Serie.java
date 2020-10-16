@@ -12,6 +12,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "SERIES")
 public class Serie {
@@ -29,7 +31,7 @@ public class Serie {
 	private Date fechaTermino;
 	private float valorInicioCuota;
 	private String continuadoraDeSerie;
-	
+	@JsonIgnore
     @OneToMany(mappedBy = "serie", fetch = FetchType.LAZY)
     private Set<Cuota> cuotas;
 

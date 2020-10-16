@@ -16,5 +16,5 @@ public interface SerieRepository extends JpaRepository<Serie, SerieId> {
 			"inner join fondosmutuos fm \r\n" + 
 			"on s.rut = fm.rut \r\n" + 
 			"where fm.vigencia = ?1", nativeQuery=true)
-	List<Serie> findByVigencia(int vigencia);
+	List<Serie> findSerieByVigencia(int vigencia);
 }

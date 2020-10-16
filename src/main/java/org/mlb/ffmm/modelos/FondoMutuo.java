@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "FONDOSMUTUOS")
 public class FondoMutuo {
@@ -19,7 +21,7 @@ public class FondoMutuo {
 	private String entidad;
 	private String administradora;
 	private int vigencia;
-	
+	@JsonIgnore
     @OneToMany(mappedBy = "fondoMutuo", fetch = FetchType.LAZY)
     private Set<Serie> serie;
 
